@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Interface.gd" type="Script" id=1]
+[ext_resource path="res://RocketPowerBar.tscn" type="PackedScene" id=2]
+
+[node name="Interface" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bars" type="VBoxContainer" parent="."]
+margin_left = 6.0
+margin_top = 5.0
+margin_right = 331.0
+margin_bottom = 21.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RocketPowerBar" parent="Bars" instance=ExtResource( 2 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 325.0
+margin_bottom = 16.0
