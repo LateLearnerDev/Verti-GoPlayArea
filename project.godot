@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Verti-goPlayArea"
-run/main_scene="res://Node2D.tscn"
+run/main_scene="res://Scenes/Levels/Node2D.tscn"
 config/icon="res://icon.png"
 
 [display]

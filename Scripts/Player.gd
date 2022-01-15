@@ -10,7 +10,7 @@ const JUMP_FORCE: float = -275.0
 const ACCELERATION: int = 7
 const FRICTION: float = 0.8
 const AIR_RESISTANCE: float = 0.02
-const ShootBlockPath = preload("res://ShootBlock.tscn")
+const ShootBlockPath = preload("res://Scenes/ShootBlock.tscn")
 
 export var jump_enabled: bool = true
 
