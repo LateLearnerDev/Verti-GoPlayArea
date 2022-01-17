@@ -21,7 +21,7 @@ func _on_Player_rocket_pack_used() -> void:
 
 
 func _on_Player_reached_max_x_speed() -> void:			
-	texture_progress.value += 2
+	texture_progress.value += 1
 	emit_signal("rocket_power_bar_charged")
 	
 
