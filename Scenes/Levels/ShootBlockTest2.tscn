@@ -69,7 +69,8 @@ follow_viewport_enable = true
 visible = false
 
 [node name="RocketPack" parent="." instance=ExtResource( 8 )]
-position = Vector2( 34, 359 )
+position = Vector2( 41, 41 )
+scale = Vector2( 1.02208, 1.0807 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 275, 346 )

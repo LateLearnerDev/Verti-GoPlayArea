@@ -1,5 +1,7 @@
 class_name Constants
 
+const TILE_SIZE: int = 16
+
 const ROCKET_FORCE: float = -15.0
 const ROCKET_MIN_FUEL: int = 5
 const GRAVITY: int = 10

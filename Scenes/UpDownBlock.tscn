@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Sprites/UpDownBlock.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/UpDownBlock.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "Down"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MovingPlatform/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 0, 7, 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("MovingPlatform/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MovingPlatform/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Up"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MovingPlatform/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 0, 3, 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
+
+[node name="UpDownBlock" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="MovingPlatform" type="KinematicBody2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="MovingPlatform"]
+position = Vector2( 0, -8 )
+texture = ExtResource( 1 )
+hframes = 8
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform"]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform"]
+root_node = NodePath("../..")
+anims/Down = SubResource( 5 )
+anims/Idle = SubResource( 2 )
+anims/RESET = SubResource( 8 )
+anims/Up = SubResource( 4 )
+
+[node name="PlayerDetection" type="Area2D" parent="MovingPlatform"]
+position = Vector2( 0, -16 )
+scale = Vector2( 0.634157, 0.305948 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform/PlayerDetection"]
+shape = SubResource( 7 )
+
+[node name="Tween" type="Tween" parent="."]
+playback_process_mode = 0
+
+[connection signal="body_entered" from="MovingPlatform/PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
