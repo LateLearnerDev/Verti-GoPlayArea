@@ -13,11 +13,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var collision_info: KinematicCollision2D = move_and_collide(velocity.normalized() * delta * SPEED * direction.x)
 	if collision_info != null:
-		var collision_object := collision_info.collider as Node2D
-				
+		var collision_object := collision_info.collider as Node2D	
 		if collision_object.get_collision_layer_bit(Constants.COLLISION_LAYERS.GROUND_WALLS_DEFAULT) \
 			or collision_object.get_collision_layer_bit(Constants.COLLISION_LAYERS.BOUNCE_BACK_BLOCK) \
-			or collision_object.get_collision_layer_bit(Constants.COLLISION_LAYERS.SHOOT_BLOCK):			
+			or collision_object.get_collision_layer_bit(Constants.COLLISION_LAYERS.SHOOT_BLOCK) \
+			or collision_object.get_collision_layer_bit(Constants.COLLISION_LAYERS.UP_DOWN_BLOCK):			
 				velocity = Vector2.ZERO
 				set_physics_process(false)
 				_on_wall_hit()

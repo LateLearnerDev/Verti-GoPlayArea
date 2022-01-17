@@ -7,7 +7,7 @@ signal reached_max_x_speed
 const MAX_X_SPEED: int = 100
 const MAX_Y_SPEED: int = -100
 const JUMP_FORCE: float = -275.0
-const ACCELERATION: int = 7
+const ACCELERATION: int = 5
 const FRICTION: float = 0.8
 const AIR_RESISTANCE: float = 0.02
 const ShootBlockPath = preload("res://Scenes/ShootBlock.tscn")

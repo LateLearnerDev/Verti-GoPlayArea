@@ -77,6 +77,7 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="MovingPlatform" type="KinematicBody2D" parent="."]
+collision_layer = 32
 
 [node name="Sprite" type="Sprite" parent="MovingPlatform"]
 position = Vector2( 0, -8 )
@@ -97,7 +98,7 @@ anims/Up = SubResource( 4 )
 
 [node name="PlayerDetection" type="Area2D" parent="MovingPlatform"]
 position = Vector2( 0, -16 )
-scale = Vector2( 0.634157, 0.305948 )
+scale = Vector2( 0.514159, 0.305948 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform/PlayerDetection"]
 shape = SubResource( 7 )

@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Verti-goPlayArea"
-run/main_scene="res://Scenes/Levels/Node2D.tscn"
+run/main_scene="res://Scenes/Levels/MixLevelTest.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -162,6 +162,7 @@ shoot={
 2d_physics/layer_3="Player"
 2d_physics/layer_4="ShootBlock"
 2d_physics/layer_5="BounceBackBlock"
+2d_physics/layer_6="UpDownBlock"
 
 [physics]
 
