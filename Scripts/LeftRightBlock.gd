@@ -1,16 +1,16 @@
-class_name UpDownBlock
+class_name LeftRightBlock
 extends Node2D
 
 const SPEED: float = 1.0
 const FULL_DURATION: float = 50.0
 
-export var end_position := Vector2(0, -80)
+export var end_position := Vector2(80, 0)
 
-var _direction := Vector2.UP
+var _direction := Vector2.RIGHT
 
 onready var platform := $MovingPlatform as KinematicBody2D
 onready var tween := $Tween as Tween
-onready var lowest_postion: Vector2 = platform.position
+onready var start_postion: Vector2 = platform.position
 onready var animation_player := $MovingPlatform/AnimationPlayer as AnimationPlayer
 
 func _ready() -> void:
@@ -28,16 +28,16 @@ func _on_PlayerDetection_body_entered(body: Node2D) -> void:
 		var duration: float
 		var current_position := platform.position
 		
-		if _direction == Vector2.UP:
-			animation_player.play("Up")
+		if _direction == Vector2.RIGHT:
+			animation_player.play("Right")
 			target = end_position
-			duration = (abs(end_position.y - current_position.y)) / FULL_DURATION 		
-			_direction = Vector2.DOWN
+			duration = (abs(end_position.x - current_position.x)) / FULL_DURATION 		
+			_direction = Vector2.LEFT
 		else:
-			animation_player.play("Down")
+			animation_player.play("Left")
 			target = Vector2.ZERO
-			duration = (abs(current_position.y - lowest_postion.y)) / FULL_DURATION 
-			_direction = Vector2.UP
+			duration = (abs(current_position.x - start_postion.x)) / FULL_DURATION 
+			_direction = Vector2.RIGHT
 		
 		tween.interpolate_property(platform, "position", current_position, target, duration)
 		tween.start()
