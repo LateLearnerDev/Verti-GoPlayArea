@@ -73,7 +73,7 @@ position = Vector2( 33, 377 )
 jump_enabled = true
 
 [node name="UpDownBlock" parent="." instance=ExtResource( 6 )]
-position = Vector2( 238, 352 )
+position = Vector2( 310, 368 )
 
 [node name="RestartArea" parent="." instance=ExtResource( 5 )]
 position = Vector2( 164, 459 )

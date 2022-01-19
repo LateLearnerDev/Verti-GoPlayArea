@@ -16,7 +16,6 @@ func _physics_process(delta: float) -> void:
 		var collision_object := collision_info.collider as Node2D	
 		
 		if collision_object.get_collision_layer_bit(Constants.COLLISION_LAYERS.UP_DOWN_LEFT_RIGHT_BLOCK):	
-			var current_transform = global_transform
 			velocity = Vector2.ZERO
 			set_physics_process(false)
 			_on_wall_hit()
