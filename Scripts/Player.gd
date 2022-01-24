@@ -17,6 +17,7 @@ export var jump_enabled: bool = true
 var _jump_ref: FuncRef = null
 var _use_rocket_pack_ref: FuncRef = null
 
+var _is_jumping: bool = false
 var _x_direction: float
 var _velocity := Vector2.ZERO
 var _shoot_spawn_x: float
@@ -52,6 +53,9 @@ func _handle_input_movement() -> void:
 	_velocity.x = clamp(_velocity.x, -MAX_X_SPEED, MAX_X_SPEED)
 	_velocity.y += Constants.GRAVITY	
 	
+	if _is_jumping && _velocity.y >= 0:
+		_is_jumping = false
+	
 	if is_on_floor():
 		_handle_floor_state(moving_x)	
 	else:	
@@ -70,7 +74,8 @@ func _handle_input_movement() -> void:
 		shoot_block_spawn_position.position.x = -_shoot_spawn_x
 		shoot_check_area.position.x = -_shoot_spawn_x
 	
-	_velocity = move_and_slide(_velocity, Vector2.UP)
+	var snap := Vector2.DOWN * 4 if !_is_jumping else Vector2.ZERO
+	_velocity = move_and_slide_with_snap(_velocity, snap, Vector2.UP)
 
 func _handle_floor_state(moving_x: bool) -> void:
 	if !moving_x:
@@ -113,12 +118,14 @@ func _setup_jump() -> FuncRef:
 		
 func _jump() -> void:
 	_velocity.y += JUMP_FORCE
+	_is_jumping = true
 	
 func _disabled_jump() -> void:
 	pass
 	
 
 func _rocket_pack() -> void:
+	_is_jumping = true
 	_rocket_pack_active = true	
 	animation_player.play("RocketUp")
 	emit_signal("rocket_pack_used")		

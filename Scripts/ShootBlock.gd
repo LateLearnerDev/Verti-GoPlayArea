@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		if collision_object.get_collision_layer_bit(Constants.COLLISION_LAYERS.UP_DOWN_LEFT_RIGHT_BLOCK):	
 			velocity = Vector2.ZERO
 			set_physics_process(false)
-			_on_wall_hit()
+			_countdown_queue_free()
 			if get_parent():
 				call_deferred("_reparent", collision_object, self, get_global_transform())
 			
@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 			or collision_object.get_collision_layer_bit(Constants.COLLISION_LAYERS.SHOOT_BLOCK):			
 				velocity = Vector2.ZERO
 				set_physics_process(false)
-				_on_wall_hit()
+				_countdown_queue_free()
 			
 func _reparent(new_parent: Node2D, node: Node2D, old_transform: Transform2D) -> void:
 	node.get_parent().remove_child(node)
@@ -38,7 +38,7 @@ func _reparent(new_parent: Node2D, node: Node2D, old_transform: Transform2D) -> 
 func set_direction(dir: Vector2) -> void:
 	direction = dir
 			
-func _on_wall_hit() -> void:
+func _countdown_queue_free() -> void:
 	var timer := Timer.new()
 	get_parent().add_child(timer)
 	timer.start(3.0)

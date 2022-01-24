@@ -78,6 +78,7 @@ script = ExtResource( 2 )
 
 [node name="MovingPlatform" type="KinematicBody2D" parent="."]
 collision_layer = 32
+motion/sync_to_physics = true
 
 [node name="Sprite" type="Sprite" parent="MovingPlatform"]
 position = Vector2( 0, -8 )
