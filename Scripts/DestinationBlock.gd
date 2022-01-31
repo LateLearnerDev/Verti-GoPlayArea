@@ -5,7 +5,7 @@ export var duration: float = 1.5
 
 onready var platform := $Platform as KinematicBody2D
 onready var tween := $Tween as Tween
-onready var destination := $Destination as Position2D
+onready var destination := $Destination2D as Position2D
 onready var starting_position: Vector2 = platform.position
 onready var platform_collision := $Platform/PlatformCollision as CollisionShape2D
 onready var player_detection := $Platform/PlayerDetection

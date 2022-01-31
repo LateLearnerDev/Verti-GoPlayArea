@@ -17,6 +17,9 @@ export var jump_enabled: bool = true
 var _jump_ref: FuncRef = null
 var _use_rocket_pack_ref: FuncRef = null
 
+
+
+var is_hanging: bool = false
 var _is_jumping: bool = false
 var _x_direction: float
 var _velocity := Vector2.ZERO
@@ -58,7 +61,9 @@ func _handle_input_movement() -> void:
 	
 	if is_on_floor():
 		_handle_floor_state(moving_x)	
+		print('on floor')
 	else:	
+		print('not on floor')
 		_handle_in_air_state(moving_x)
 	
 	if _rocket_pack_equipped:	
@@ -92,6 +97,9 @@ func _handle_floor_state(moving_x: bool) -> void:
 		
 		
 func _handle_in_air_state(moving_x: bool) -> void:
+	if is_hanging and Input.is_action_pressed("ui_accept"):
+		_velocity.y = 0
+		return	
 	if not _rocket_pack_active:	
 		animation_player.play(_jump_animation_name)
 	if Input.is_action_just_released("ui_accept") and _velocity.y < JUMP_FORCE/2:
