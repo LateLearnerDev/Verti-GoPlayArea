@@ -18,7 +18,6 @@ var _jump_ref: FuncRef = null
 var _use_rocket_pack_ref: FuncRef = null
 
 
-
 var is_hanging: bool = false
 var _is_jumping: bool = false
 var _x_direction: float
@@ -61,9 +60,8 @@ func _handle_input_movement() -> void:
 	
 	if is_on_floor():
 		_handle_floor_state(moving_x)	
-		print('on floor')
+		
 	else:	
-		print('not on floor')
 		_handle_in_air_state(moving_x)
 	
 	if _rocket_pack_equipped:	
@@ -72,6 +70,7 @@ func _handle_input_movement() -> void:
 	if Input.is_action_just_pressed("shoot"):
 		_shoot()
 		
+	# This should be based on facing vector, not input
 	if Input.is_action_just_pressed("ui_right"):
 		shoot_block_spawn_position.position.x = _shoot_spawn_x
 		shoot_check_area.position.x = _shoot_spawn_x
@@ -98,7 +97,7 @@ func _handle_floor_state(moving_x: bool) -> void:
 		
 func _handle_in_air_state(moving_x: bool) -> void:
 	if is_hanging and Input.is_action_pressed("ui_accept"):
-		_velocity.y = 0
+		_handle_hanging(moving_x)
 		return	
 	if not _rocket_pack_active:	
 		animation_player.play(_jump_animation_name)
@@ -109,6 +108,11 @@ func _handle_in_air_state(moving_x: bool) -> void:
 		_velocity.x = lerp(_velocity.x, 0, AIR_RESISTANCE)
 	else:
 		sprite.flip_h = _x_direction < 0
+		
+func _handle_hanging(moving_x: bool) -> void:
+	_velocity.y = 0
+	if !moving_x:
+		_velocity.x = 0
 	
 
 func _handle_rocket_pack_state() -> void:
