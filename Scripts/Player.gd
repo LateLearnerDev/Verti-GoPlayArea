@@ -29,6 +29,8 @@ var _rocket_pack_empty: bool = false
 var _run_animation_name: String = "Run"
 var _idle_animation_name: String = "Idle"
 var _jump_animation_name: String = "Jump"
+var _hang_idle_animation_name: String = "HangIdle"
+var _hang_move_animation_name: String = "HangMove"
 onready var sprite := $Sprite as Sprite
 onready var animation_player := $AnimationPlayer as AnimationPlayer
 onready var shoot_block_spawn_position := $ShootSpawnPos as Position2D
@@ -49,7 +51,7 @@ func _process(_delta: float) -> void:
 		
 
 func _handle_input_movement() -> void:	
-	var moving_x := _x_direction != 0
+	var is_moving_x := _x_direction != 0
 	
 	_velocity.x += _x_direction * ACCELERATION
 	_velocity.x = clamp(_velocity.x, -MAX_X_SPEED, MAX_X_SPEED)
@@ -59,10 +61,10 @@ func _handle_input_movement() -> void:
 		_is_jumping = false
 	
 	if is_on_floor():
-		_handle_floor_state(moving_x)	
+		_handle_floor_state(is_moving_x)	
 		
 	else:	
-		_handle_in_air_state(moving_x)
+		_handle_in_air_state(is_moving_x)
 	
 	if _rocket_pack_equipped:	
 		_handle_rocket_pack_state()
@@ -112,7 +114,11 @@ func _handle_in_air_state(moving_x: bool) -> void:
 func _handle_hanging(moving_x: bool) -> void:
 	_velocity.y = 0
 	if !moving_x:
+		animation_player.play(_hang_idle_animation_name)
 		_velocity.x = 0
+	else:
+		sprite.flip_h = _x_direction < 0
+		animation_player.play(_hang_move_animation_name)
 	
 
 func _handle_rocket_pack_state() -> void:
@@ -152,6 +158,8 @@ func _on_RocketPack_rocket_pack_collected() -> void:
 	_run_animation_name = "RocketRun"
 	_idle_animation_name = "RocketIdle"
 	_jump_animation_name = "RocketJump"
+	_hang_idle_animation_name = "HangRocketIdle"
+	_hang_move_animation_name = "HangRocketMove"
 	_use_rocket_pack_ref = funcref(self, "_rocket_pack")
 	
 func _on_RocketPowerBar_rocket_power_bar_depleted() -> void:

@@ -182,6 +182,7 @@ shoot={
 2d_physics/layer_5="BounceBackBlock"
 2d_physics/layer_6="UpDownLeftRightBlock"
 2d_physics/layer_7="Hanging"
+2d_physics/layer_8="PlayerHangCheck"
 2d_physics/layer_32="Empty"
 
 [physics]

@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Sprites/Tiles.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/RestartArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/RestartArea.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/HangArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/FourTileHangingFrame.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/RocketPack.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -61,16 +64,12 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
 
-[node name="Interface" parent="InterfaceLayer" instance=ExtResource( 2 )]
+[node name="Interface" parent="InterfaceLayer" instance=ExtResource( 6 )]
 
 [node name="RocketPowerBar" parent="InterfaceLayer/Interface/Bars" index="0"]
 visible = false
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 48, 364 )
-jump_enabled = true
-
-[node name="RestartArea" parent="." instance=ExtResource( 4 )]
+[node name="RestartArea" parent="." instance=ExtResource( 2 )]
 position = Vector2( 164, 459 )
 scale = Vector2( 16.4169, -1.0806 )
 
@@ -78,7 +77,34 @@ scale = Vector2( 16.4169, -1.0806 )
 tile_set = SubResource( 4 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 0, 0, 2, 20, 0, 2, 65536, 0, 2, 65556, 0, 2, 131072, 0, 2, 131092, 0, 2, 196608, 0, 2, 196628, 0, 2, 262144, 0, 2, 262164, 0, 2, 327680, 0, 2, 327700, 0, 0, 393216, 0, 2, 393236, 0, 0, 458752, 0, 2, 458772, 0, 0, 524288, 0, 0, 524308, 0, 2, 589824, 0, 0, 589844, 0, 2, 655360, 0, 0, 655380, 0, 2, 720896, 0, 2, 720916, 0, 2, 786432, 0, 2, 786452, 0, 2, 851968, 0, 2, 851988, 0, 2, 917504, 0, 2, 917524, 0, 2, 983040, 0, 2, 983060, 0, 2, 1048576, 0, 2, 1048596, 0, 2, 1114112, 0, 2, 1114132, 0, 2, 1179648, 0, 2, 1179668, 0, 2, 1245184, 0, 2, 1245204, 0, 2, 1310720, 0, 2, 1310740, 0, 2, 1376256, 0, 2, 1376276, 0, 2, 1441792, 0, 2, 1441812, 0, 2, 1507328, 0, 2, 1507348, 0, 2, 1572864, 0, 2, 1572866, 0, 0, 1572867, 0, 0, 1572868, 0, 0, 1572869, 0, 0, 1572870, 0, 0, 1572884, 0, 2, 1638400, 0, 2, 1638420, 0, 2, 1703936, 0, 2, 1703956, 0, 2 )
+tile_data = PoolIntArray( 0, 0, 2, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 20, 0, 2, 65536, 0, 2, 65556, 0, 2, 131072, 0, 2, 131092, 0, 2, 196608, 0, 2, 196628, 0, 2, 262144, 0, 2, 262164, 0, 2, 327680, 0, 2, 327700, 0, 0, 393216, 0, 2, 393236, 0, 0, 458752, 0, 2, 458772, 0, 0, 524288, 0, 0, 524308, 0, 2, 589824, 0, 0, 589844, 0, 2, 655360, 0, 0, 655380, 0, 2, 720896, 0, 2, 720916, 0, 2, 786432, 0, 2, 786452, 0, 2, 851968, 0, 2, 851988, 0, 2, 917504, 0, 2, 917524, 0, 2, 983040, 0, 2, 983060, 0, 2, 1048576, 0, 2, 1048596, 0, 2, 1114112, 0, 2, 1114132, 0, 2, 1179648, 0, 2, 1179651, 0, 0, 1179652, 0, 0, 1179653, 0, 0, 1179654, 0, 0, 1179655, 0, 0, 1179656, 0, 0, 1179657, 0, 0, 1179658, 0, 0, 1179659, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179662, 0, 0, 1179668, 0, 2, 1245184, 0, 2, 1245204, 0, 2, 1310720, 0, 2, 1310740, 0, 2, 1376256, 0, 2, 1376276, 0, 2, 1441792, 0, 2, 1441812, 0, 2, 1507328, 0, 2, 1507348, 0, 2, 1572864, 0, 2, 1572866, 0, 0, 1572867, 0, 0, 1572884, 0, 2, 1638400, 0, 2, 1638420, 0, 2, 1703936, 0, 2, 1703954, 0, 0, 1703955, 0, 0, 1703956, 0, 2 )
+
+[node name="RocketPack" parent="." instance=ExtResource( 7 )]
+position = Vector2( 95, 277 )
+
+[node name="FourTileHangingFrame" parent="." instance=ExtResource( 4 )]
+position = Vector2( 178, 303 )
+
+[node name="FourTileHangingFrame4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 74, 16 )
+
+[node name="FourTileHangingFrame2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 117, 303 )
+
+[node name="FourTileHangingFrame3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 56, 303 )
+
+[node name="HangArea2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 97, 23 )
+scale = Vector2( 3.09067, 0.0577777 )
+
+[node name="HangArea" parent="." instance=ExtResource( 3 )]
+position = Vector2( 141, 309 )
+scale = Vector2( 9.21067, 0.217778 )
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 59, 282 )
+jump_enabled = true
 
 [connection signal="rocket_power_bar_charged" from="InterfaceLayer/Interface/Bars/RocketPowerBar" to="Player" method="_on_RocketPowerBar_rocket_power_bar_charged"]
 [connection signal="rocket_power_bar_depleted" from="InterfaceLayer/Interface/Bars/RocketPowerBar" to="Player" method="_on_RocketPowerBar_rocket_power_bar_depleted"]

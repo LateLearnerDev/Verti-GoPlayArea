@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Sprites/Tiles.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/LeftRightBlock.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/VanishBlock.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/FourTileHangingFrame.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/HangArea.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -123,6 +124,10 @@ delay = true
 
 [node name="VanishBlock3" parent="." instance=ExtResource( 10 )]
 position = Vector2( 166, 178 )
+
+[node name="HangArea" parent="." instance=ExtResource( 12 )]
+position = Vector2( 191, 358 )
+scale = Vector2( 2.95428, 0.0309544 )
 
 [node name="FourTileHangingFrame" parent="." instance=ExtResource( 11 )]
 
