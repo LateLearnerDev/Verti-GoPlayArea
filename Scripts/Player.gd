@@ -16,21 +16,22 @@ export var jump_enabled: bool = true
 
 var _jump_ref: FuncRef = null
 var _use_rocket_pack_ref: FuncRef = null
+var _use_block_gun_ref: FuncRef = null
 
-
-var is_hanging: bool = false
-var _is_jumping: bool = false
+var is_hanging := false
+var _is_jumping := false
 var _x_direction: float
 var _velocity := Vector2.ZERO
 var _shoot_spawn_x: float
-var _rocket_pack_equipped: bool = false
-var _rocket_pack_active: bool = false
-var _rocket_pack_empty: bool = false
-var _run_animation_name: String = "Run"
-var _idle_animation_name: String = "Idle"
-var _jump_animation_name: String = "Jump"
-var _hang_idle_animation_name: String = "HangIdle"
-var _hang_move_animation_name: String = "HangMove"
+var _block_gun_equipped := false
+var _rocket_pack_equipped := false
+var _rocket_pack_active := false
+var _rocket_pack_empty := false
+var _run_animation_name := "Run"
+var _idle_animation_name := "Idle"
+var _jump_animation_name := "Jump"
+var _hang_idle_animation_name := "HangIdle"
+var _hang_move_animation_name := "HangMove"
 onready var sprite := $Sprite as Sprite
 onready var animation_player := $AnimationPlayer as AnimationPlayer
 onready var shoot_block_spawn_position := $ShootSpawnPos as Position2D
@@ -39,6 +40,7 @@ onready var shoot_check_area := $ShootCheckArea as Area2D
 func _ready() -> void:
 	_jump_ref = _setup_jump()
 	_use_rocket_pack_ref = funcref(self, "_disabled_rocket_pack")
+	_use_block_gun_ref = funcref(self, "_disabled_block_gun")
 	_shoot_spawn_x = shoot_block_spawn_position.position.x
 
 
@@ -70,7 +72,7 @@ func _handle_input_movement() -> void:
 		_handle_rocket_pack_state()
 		
 	if Input.is_action_just_pressed("shoot"):
-		_shoot()
+		_use_block_gun_ref.call_func()
 		
 	# This should be based on facing vector, not input
 	if Input.is_action_just_pressed("ui_right"):
@@ -167,7 +169,14 @@ func _on_RocketPowerBar_rocket_power_bar_depleted() -> void:
 
 func _on_RocketPowerBar_rocket_power_bar_charged() -> void:
 	_rocket_pack_empty = false
+	
 
+func _on_BlockGun_block_gun_collected() -> void:
+	_block_gun_equipped = true
+	_use_block_gun_ref = funcref(self, "_shoot")
+	
+func _disabled_block_gun() -> void:
+	pass
 
 func _shoot() -> void:
 	if !_can_shoot():

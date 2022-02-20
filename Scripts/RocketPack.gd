@@ -3,10 +3,6 @@ extends Area2D
 
 signal rocket_pack_collected
 
-onready var sprite: Sprite = $Sprite
-onready var collion_shape: CollisionShape2D = $CollisionShape2D
-
-
 func _ready() -> void:
 	_try_connect_rocket_pack_collected_to_player()
 	_try_connect_rocket_pack_collected_to_rocket_power_bar()	
@@ -19,7 +15,7 @@ func _try_connect_rocket_pack_collected_to_player() -> void:
 		if error:
 			print(error)
 	else:
-		print("Player not found")
+		print("Player not found. Have you made sure the parent of Player is the root?")
 
 
 func _try_connect_rocket_pack_collected_to_rocket_power_bar() -> void:

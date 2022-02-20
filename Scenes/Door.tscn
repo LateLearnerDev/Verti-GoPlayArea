@@ -110,7 +110,7 @@ locked = false
 position = Vector2( 0, -14 )
 texture = ExtResource( 1 )
 hframes = 5
-frame = 4
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -13.5 )
