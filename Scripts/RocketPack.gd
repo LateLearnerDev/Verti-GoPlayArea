@@ -9,7 +9,7 @@ func _ready() -> void:
 	
 	
 func _try_connect_rocket_pack_collected_to_player() -> void:
-	var player: Player = get_node_or_null("../Player")
+	var player := get_node_or_null("../Player") as Player
 	if player:
 		var error = connect("rocket_pack_collected", player, "_on_RocketPack_rocket_pack_collected")
 		if error:
@@ -19,7 +19,7 @@ func _try_connect_rocket_pack_collected_to_player() -> void:
 
 
 func _try_connect_rocket_pack_collected_to_rocket_power_bar() -> void:
-	var rocket_power_bar: RocketPowerBar = get_node_or_null("../InterfaceLayer/Interface/Bars/RocketPowerBar")
+	var rocket_power_bar := get_node_or_null("../InterfaceLayer/Interface/Bars/RocketPowerBar") as RocketPowerBar
 	if rocket_power_bar:
 		var error = connect("rocket_pack_collected", rocket_power_bar, "_on_RocketPack_rocket_pack_collected")
 		if error:
