@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Tiles.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/BlockGun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Ticket.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/RestartArea.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/BounceBackBlock.tscn" type="PackedScene" id=7]
 
@@ -70,10 +71,6 @@ margin_right = -1.0
 [node name="RocketPowerBar" parent="InterfaceLayer/Interface/Bars" index="0"]
 visible = false
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 28, 353 )
-jump_enabled = true
-
 [node name="StaticBody2D" parent="." instance=ExtResource( 7 )]
 position = Vector2( 232, 304 )
 
@@ -117,13 +114,20 @@ scale = Vector2( 16.0693, 1.84979 )
 [node name="BlockGun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 37, 319 )
 
+[node name="Ticket" parent="." instance=ExtResource( 5 )]
+position = Vector2( 210, 159 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 28, 353 )
+jump_enabled = true
+
 [connection signal="rocket_power_bar_charged" from="InterfaceLayer/Interface/Bars/RocketPowerBar" to="Player" method="_on_RocketPowerBar_rocket_power_bar_charged"]
 [connection signal="rocket_power_bar_depleted" from="InterfaceLayer/Interface/Bars/RocketPowerBar" to="Player" method="_on_RocketPowerBar_rocket_power_bar_depleted"]
 [connection signal="reached_max_x_speed" from="Player" to="InterfaceLayer/Interface/Bars/RocketPowerBar" method="_on_Player_reached_max_x_speed"]
 [connection signal="rocket_pack_used" from="Player" to="InterfaceLayer/Interface/Bars/RocketPowerBar" method="_on_Player_rocket_pack_used"]
 
 [editable path="InterfaceLayer/Interface"]
-[editable path="Player"]
 [editable path="StaticBody2D4"]
 [editable path="StaticBody2D5"]
 [editable path="StaticBody2D6"]
+[editable path="Player"]
