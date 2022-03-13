@@ -69,7 +69,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 0/z_index = 0
 
-[node name="Level" type="Node2D"]
+[node name="MixLevelTest" type="Node2D"]
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true

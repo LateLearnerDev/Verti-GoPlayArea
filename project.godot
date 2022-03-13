@@ -120,6 +120,10 @@ config/name="Verti-goPlayArea"
 run/main_scene="res://Scenes/Levels/MixLevelTest.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+TicketCount="*res://Scenes/TicketCount.tscn"
+
 [display]
 
 window/size/width=336
