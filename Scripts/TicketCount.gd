@@ -19,14 +19,11 @@ func add_ticket(ticket: Ticket) -> void:
 		ticket_count += 1
 		_set_ticket_count_label_text()	
 		
-		if ticket_count == 3:
-			get_tree().change_scene("res://Scenes/Levels/MixLevelTest.tscn")
 	else:
 		pass
 	
 	
 func supply_id(ticket: Ticket, level_name: String) -> void:
-	print(ticket)
 	is_current_ticket_registered = false
 	_set_ticket_faded_if_already_collected(ticket, level_name)
 	ticket.set_id(level_name)
